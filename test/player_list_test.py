@@ -16,9 +16,11 @@ class PlayerListTest(unittest.TestCase):
         list1.add_node_to_head(node1)
         self.assertEqual(list1._start.get_key(), node1.get_key())
         self.assertFalse(list1.is_empty)
+        self.assertEqual(list1.get_tail(), node1)
         list1.add_node_to_head(node2)
         self.assertEqual(list1._start.get_key(), node2.get_key())
         self.assertFalse(list1.is_empty)
+        self.assertEqual(list1.get_tail(), node1)
 
 
 if __name__ == '__main__':

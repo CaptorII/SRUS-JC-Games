@@ -30,3 +30,7 @@ class PlayerNode:
     def __str__(self):
         class_name = self.__class__.__name__
         return f"{class_name}(player={self._player}, prev_node={self._prev_node})"
+
+    def __repr__(self):
+        class_name = self.__class__.__name__
+        return f"{class_name}(player={self._player!r}, prev_node={self._prev_node!r})"
