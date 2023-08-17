@@ -14,6 +14,8 @@ class PlayerListTest(unittest.TestCase):
         player3 = Player('xyz', 'allan')
         node3 = PlayerNode(player3, None)
 
+        list1.pop_head()  # confirm does not crash if empty
+        list1.pop_tail()  # ^
         self.assertTrue(list1.is_empty)
         list1.add_node_to_head(node1)
         self.assertEqual(list1._start.get_key(), node1.get_key())
@@ -26,6 +28,10 @@ class PlayerListTest(unittest.TestCase):
         list1.add_node_to_tail(node3)
         self.assertEqual(list1.get_tail, node3)
         self.assertEqual(list1.get_head, node2)
+        list1.pop_tail()
+        self.assertEqual(list1.get_tail, node1)
+        list1.pop_head()
+        self.assertEqual(list1.get_head, node1)
 
 
 if __name__ == '__main__':

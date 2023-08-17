@@ -29,6 +29,22 @@ class PlayerList:
         self._tail = new_node
         self._tail._prev_node = temp_node
 
+    def pop_head(self):
+        if self.is_empty:
+            return
+        if self._start.get_next_node() is None:
+            self._start = None
+            return
+        self._start = self._start.get_next_node()
+
+    def pop_tail(self):
+        if self.is_empty:
+            return
+        if self._tail.get_prev_node() is None:
+            self._tail = None
+            return
+        self._tail = self._tail.get_prev_node()
+
     @property
     def get_head(self) -> PlayerNode:
         return self._start
