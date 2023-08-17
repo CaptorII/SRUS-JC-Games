@@ -11,16 +11,21 @@ class PlayerListTest(unittest.TestCase):
         node1 = PlayerNode(player1, None)
         player2 = Player('abc', 'jake')
         node2 = PlayerNode(player2, None)
+        player3 = Player('xyz', 'allan')
+        node3 = PlayerNode(player3, None)
 
         self.assertTrue(list1.is_empty)
         list1.add_node_to_head(node1)
         self.assertEqual(list1._start.get_key(), node1.get_key())
         self.assertFalse(list1.is_empty)
-        self.assertEqual(list1.get_tail(), node1)
+        self.assertEqual(list1.get_tail, node1)
         list1.add_node_to_head(node2)
         self.assertEqual(list1._start.get_key(), node2.get_key())
         self.assertFalse(list1.is_empty)
-        self.assertEqual(list1.get_tail(), node1)
+        self.assertEqual(list1.get_tail, node1)
+        list1.add_node_to_tail(node3)
+        self.assertEqual(list1.get_tail, node3)
+        self.assertEqual(list1.get_head, node2)
 
 
 if __name__ == '__main__':

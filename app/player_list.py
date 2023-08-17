@@ -19,6 +19,21 @@ class PlayerList:
         self._start = new_node
         self._start._next_node = temp_node
 
+    def add_node_to_tail(self, new_node: PlayerNode):
+        if self.is_empty:
+            self._start = new_node
+            self._tail = new_node
+            self.is_empty = False
+            return
+        temp_node = self._tail
+        self._tail = new_node
+        self._tail._prev_node = temp_node
+
+    @property
+    def get_head(self) -> PlayerNode:
+        return self._start
+
+    @property
     def get_tail(self) -> PlayerNode:
         return self._tail
 
