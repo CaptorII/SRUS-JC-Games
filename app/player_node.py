@@ -1,6 +1,6 @@
 from __future__ import annotations
 from typing import Optional
-from player import Player
+from app.player import Player
 
 
 class PlayerNode:

@@ -6,11 +6,19 @@ from app.player_list import PlayerList
 
 class PlayerListTest(unittest.TestCase):
     def runTest(self):
-        list = PlayerList()
-        list.add_node_to_head(PlayerNode(Player('1', 'john')))
-        self.assertEqual(list._start.get_key, '1')
-        list.add_node_to_head(PlayerNode(Player('abc', 'jake')))
-        self.assertEqual(list._start.get_key, 'abc')
+        list1 = PlayerList()
+        player1 = Player('1', 'john')
+        node1 = PlayerNode(player1, None)
+        player2 = Player('abc', 'jake')
+        node2 = PlayerNode(player2, None)
+
+        self.assertTrue(list1.is_empty)
+        list1.add_node_to_head(node1)
+        self.assertEqual(list1._start.get_key(), node1.get_key())
+        self.assertFalse(list1.is_empty)
+        list1.add_node_to_head(node2)
+        self.assertEqual(list1._start.get_key(), node2.get_key())
+        self.assertFalse(list1.is_empty)
 
 
 if __name__ == '__main__':
