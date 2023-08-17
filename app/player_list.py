@@ -17,7 +17,7 @@ class PlayerList:
             return
         temp_node = self._start
         self._start = new_node
-        self._start._next_node = temp_node
+        self._start.set_next_node(temp_node)
 
     def add_node_to_tail(self, new_node: PlayerNode):
         if self.is_empty:
@@ -27,23 +27,39 @@ class PlayerList:
             return
         temp_node = self._tail
         self._tail = new_node
-        self._tail._prev_node = temp_node
+        self._tail.set_next_node(temp_node)
 
     def pop_head(self):
         if self.is_empty:
             return
-        if self._start.get_next_node() is None:
+        if self._start.get_next_node is None:
             self._start = None
+            self.is_empty = True
             return
-        self._start = self._start.get_next_node()
+        self._start = self._start.get_next_node
 
     def pop_tail(self):
         if self.is_empty:
             return
-        if self._tail.get_prev_node() is None:
+        if self._tail.get_prev_node is None:
             self._tail = None
+            self.is_empty = True
             return
-        self._tail = self._tail.get_prev_node()
+        self._tail = self._tail.get_prev_node
+
+    def pop_key(self, key: str):
+        if self.is_empty:
+            return
+        temp_node = self._start
+        while temp_node is not None:
+            if temp_node.get_key == key:
+                next = temp_node.get_next_node
+                prev = temp_node.get_prev_node
+                next._prev_node = prev
+                prev._next_node = next
+                return
+            if temp_node.get_next_node is not None:
+                temp_node = temp_node.get_next_node
 
     @property
     def get_head(self) -> PlayerNode:
