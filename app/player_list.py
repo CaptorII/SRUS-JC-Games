@@ -78,6 +78,29 @@ class PlayerList:
     def get_tail(self) -> PlayerNode:
         return self._tail
 
+    def display(self, forward=True) -> None:
+        if forward:
+            print("Displaying list in order:")
+            if self.is_empty:
+                print("Nothing here...")
+                return
+            temp_node = self._start
+            while temp_node is not None:
+                print(temp_node.__str__())
+                if temp_node.next_node is not None:
+                    temp_node = temp_node.next_node
+                else:
+                    return
+
+        print("Displaying list in reverse order:")
+        temp_node = self._tail
+        while temp_node is not None:
+            print(temp_node.__str__())
+            if temp_node.prev_node is not None:
+                temp_node = temp_node.prev_node
+            else:
+                return
+
     def __repr__(self):
         class_name = self.__class__.__name__
         return f'{class_name}()'
