@@ -55,15 +55,18 @@ class PlayerList:
         if self.is_empty:
             return
         temp_node = self._start
-        if self.get_tail == temp_node and temp_node.get_key == key:
+        if temp_node.get_key == key:
             self.pop_head()
-        while temp_node.next_node is not None:
+            return
+        while temp_node.next_node is not None or temp_node is self._tail:
             if temp_node.get_key == key:
-                next = temp_node.next_node
-                prev = temp_node.prev_node
-                next.prev_node = prev
-                prev.next_node = next
-                return
+                if temp_node.next_node is not None:
+                    next = temp_node.next_node
+                    prev = temp_node.prev_node
+                    next.prev_node = prev
+                    prev.next_node = next
+                    return
+                self.pop_tail()
             if temp_node.next_node is not None:
                 temp_node = temp_node.next_node
 
