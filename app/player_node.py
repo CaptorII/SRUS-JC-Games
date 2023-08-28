@@ -10,7 +10,7 @@ class PlayerNode:
         self._next_node: Optional[PlayerNode] = None
 
     @property
-    def get_player(self) -> Player:
+    def player(self) -> Player:
         return self._player
 
     @property
@@ -30,8 +30,8 @@ class PlayerNode:
         self._next_node = next_node
 
     @property
-    def get_key(self) -> str:
-        return self._player.get_uid
+    def key(self) -> str:
+        return self._player.uid
 
     def __str__(self):
         class_name = self.__class__.__name__

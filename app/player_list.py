@@ -1,103 +1,116 @@
 from __future__ import annotations
-from typing import Optional
 from app.player_node import PlayerNode
+
+
+class EmptyListError(Exception):
+    pass
 
 
 class PlayerList:
     def __init__(self):
-        self._start: Optional[PlayerNode] = None
-        self._tail: Optional[PlayerNode] = None
-        self.is_empty: bool = True
+        self._head: PlayerNode | None = None
+        self._tail: PlayerNode | None = None
 
     def add_node_to_head(self, new_node: PlayerNode):
-        if self.is_empty:
-            self._start = new_node
+        if self.is_empty:  # check if adding to empty list first
+            self._head = new_node
             self._tail = new_node
-            self.is_empty = False
             return
-        temp_node = self._start
-        self._start = new_node
-        self._start.next_node = temp_node
-        temp_node.prev_node = self._start
+        current_node = self._head  # if list not empty, replace current head with new node
+        self._head = new_node
+        self._head.next_node = current_node
+        current_node.prev_node = self._head
 
     def add_node_to_tail(self, new_node: PlayerNode):
         if self.is_empty:
-            self._start = new_node
+            self._head = new_node
             self._tail = new_node
-            self.is_empty = False
             return
-        temp_node = self._tail
+        current_node = self._tail
         self._tail = new_node
-        self._tail.prev_node = temp_node
-        temp_node.next_node = self._tail
+        self._tail.prev_node = current_node
+        current_node.next_node = self._tail
 
     def pop_head(self):
         if self.is_empty:
+            raise EmptyListError("Requested list is empty, cannot remove node")
+        if self._head.next_node is None:
+            self._head = None
             return
-        if self._start.next_node is None:
-            self._start = None
-            self.is_empty = True
-            return
-        self._start = self._start.next_node
-        self._start.prev_node = None
+        self._head = self._head.next_node
+        self._head.prev_node = None
 
     def pop_tail(self):
         if self.is_empty:
-            return
+            raise EmptyListError("Requested list is empty, cannot remove node")
         if self._tail.prev_node is None:
             self._tail = None
-            self.is_empty = True
             return
         self._tail = self._tail.prev_node
         self._tail.next_node = None
 
     def pop_key(self, key: str):
         if self.is_empty:
+            raise EmptyListError("Requested list is empty, cannot remove node")
+        current_node = self._head
+        if current_node.key == key:  # if head or tail keys match specified keys
+            self.pop_head()  # pop them first, then return
             return
-        temp_node = self._start
-        if temp_node.get_key == key:
-            self.pop_head()
+        if self.tail.key == key:
+            self.pop_tail()
             return
-        while temp_node.next_node is not None or temp_node is self._tail:
-            if temp_node.get_key == key:
-                if temp_node.next_node is not None:
-                    next = temp_node.next_node
-                    prev = temp_node.prev_node
-                    next.prev_node = prev
-                    prev.next_node = next
-                    return
-                self.pop_tail()
-            if temp_node.next_node is not None:
-                temp_node = temp_node.next_node
+        while current_node.next_node is not None:  # search list other than head/tail
+            if current_node.key == key:  # if key matches, delete by updating references, then return
+                next = current_node.next_node
+                prev = current_node.prev_node
+                next.prev_node = prev
+                prev.next_node = next
+                return
+            current_node = current_node.next_node  # if this node does not match, move onto next node
 
     @property
-    def get_head(self) -> PlayerNode:
-        return self._start
+    def head(self) -> PlayerNode | None:
+        return self._head
+
+    @head.setter
+    def head(self, new_node: PlayerNode | None):
+        self._head = new_node
 
     @property
-    def get_tail(self) -> PlayerNode:
+    def tail(self) -> PlayerNode | None:
         return self._tail
 
-    def display(self, forward=True) -> None:
+    @tail.setter
+    def tail(self, new_node: PlayerNode | None):
+        self._tail = new_node
+
+    @property
+    def is_empty(self) -> bool:
+        return self._head is None
+
+    def display(self, forward=True):
         if forward:
             print("Displaying list in order:")
             if self.is_empty:
                 print("Nothing here...")
                 return
-            temp_node = self._start
-            while temp_node is not None:
-                print(temp_node.__str__())
-                if temp_node.next_node is not None:
-                    temp_node = temp_node.next_node
+            current_node = self._head
+            while current_node is not None:
+                print(current_node.__str__())
+                if current_node.next_node is not None:
+                    current_node = current_node.next_node
                 else:
                     return
 
         print("Displaying list in reverse order:")
-        temp_node = self._tail
-        while temp_node is not None:
-            print(temp_node.__str__())
-            if temp_node.prev_node is not None:
-                temp_node = temp_node.prev_node
+        if self.is_empty:
+            print("Nothing here...")
+            return
+        current_node = self._tail
+        while current_node is not None:
+            print(current_node.__str__())
+            if current_node.prev_node is not None:
+                current_node = current_node.prev_node
             else:
                 return
 
