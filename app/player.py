@@ -9,11 +9,11 @@ class Player:
         self._score = 0
 
     @property
-    def get_uid(self) -> str:
+    def uid(self) -> str:
         return self._uid
 
     @property
-    def get_name(self) -> str:
+    def name(self) -> str:
         return self._name
 
     @property
