@@ -1,12 +1,10 @@
-from __future__ import annotations
-
-
 class Player:
 
     def __init__(self, uid: str, name: str):
         self._uid = uid
         self._name = name
         self._score = 0
+        self._password = ''
 
     @property
     def uid(self) -> str:
@@ -15,6 +13,12 @@ class Player:
     @property
     def name(self) -> str:
         return self._name
+
+    def add_password(self, new_password: str):
+        self._password = new_password
+
+    def verify_password(self, password_guess: str) -> str:
+        return self._password
 
     @property
     def score(self) -> int:
@@ -38,5 +42,11 @@ class Player:
     def __ge__(self, other):
         return self._score >= other.score
 
+    def __le__(self, other):
+        return self._score <= other.score
+
     def __lt__(self, other):
         return self._score < other.score
+
+    def __gt__(self, other):
+        return self._score > other.score

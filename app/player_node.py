@@ -14,11 +14,11 @@ class PlayerNode:
         return self._player
 
     @property
-    def prev_node(self) -> PlayerNode:
+    def previous_node(self) -> PlayerNode:
         return self._prev_node
 
-    @prev_node.setter
-    def prev_node(self, prev_node: PlayerNode):
+    @previous_node.setter
+    def previous_node(self, prev_node: PlayerNode):
         self._prev_node = prev_node
 
     @property

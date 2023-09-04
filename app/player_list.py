@@ -1,4 +1,4 @@
-from __future__ import annotations
+from app.player import Player
 from app.player_node import PlayerNode
 
 
@@ -11,7 +11,8 @@ class PlayerList:
         self._head: PlayerNode | None = None
         self._tail: PlayerNode | None = None
 
-    def add_node_to_head(self, new_node: PlayerNode):
+    def add_node_to_head(self, new_player: Player):
+        new_node: PlayerNode = PlayerNode(new_player)
         if self.is_empty:  # check if adding to empty list first
             self._head = new_node
             self._tail = new_node
@@ -19,16 +20,17 @@ class PlayerList:
         current_node = self._head  # if list not empty, replace current head with new node
         self._head = new_node
         self._head.next_node = current_node
-        current_node.prev_node = self._head
+        current_node.previous_node = self._head
 
-    def add_node_to_tail(self, new_node: PlayerNode):
+    def add_node_to_tail(self, new_player: Player):
+        new_node: PlayerNode = PlayerNode(new_player)
         if self.is_empty:
             self._head = new_node
             self._tail = new_node
             return
         current_node = self._tail
         self._tail = new_node
-        self._tail.prev_node = current_node
+        self._tail.previous_node = current_node
         current_node.next_node = self._tail
 
     def pop_head(self):
@@ -38,15 +40,15 @@ class PlayerList:
             self._head = None
             return
         self._head = self._head.next_node
-        self._head.prev_node = None
+        self._head.previous_node = None
 
     def pop_tail(self):
         if self.is_empty:
             raise EmptyListError("Requested list is empty, cannot remove node")
-        if self._tail.prev_node is None:
+        if self._tail.previous_node is None:
             self._tail = None
             return
-        self._tail = self._tail.prev_node
+        self._tail = self._tail.previous_node
         self._tail.next_node = None
 
     def pop_key(self, key: str):
@@ -62,9 +64,9 @@ class PlayerList:
         while current_node.next_node is not None:  # search list other than head/tail
             if current_node.key == key:  # if key matches, delete by updating references, then return
                 next = current_node.next_node
-                prev = current_node.prev_node
-                next.prev_node = prev
-                prev.next_node = next
+                previous = current_node.previous_node
+                next.previous_node = previous
+                previous.next_node = next
                 return
             current_node = current_node.next_node  # if this node does not match, move onto next node
 
@@ -109,8 +111,8 @@ class PlayerList:
         current_node = self._tail
         while current_node is not None:
             print(current_node.__str__())
-            if current_node.prev_node is not None:
-                current_node = current_node.prev_node
+            if current_node.previous_node is not None:
+                current_node = current_node.previous_node
             else:
                 return
 
