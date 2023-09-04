@@ -20,7 +20,11 @@ class Player:
     def add_password(self, new_password: str):
         self._hashed_password = ph.hash(new_password)
 
-    def verify_password(self, password_guess: str) -> bool:
+    def verify_password(self, password_guess: str = None) -> bool:
+        if password_guess is None:
+            raise TypeError("No password provided")
+        if self._hashed_password is None:
+            raise TypeError("No password on account")
         return ph.verify(self._hashed_password, password_guess)
 
     @property

@@ -16,11 +16,15 @@ class PlayerTest(unittest.TestCase):
     def test_password_is_incorrect(self):
         with self.assertRaises(VerifyMismatchError):
             self.players[0].verify_password('54321')
-            self.players[0].verify_password('aeiou')
+            self.players[0].verify_password('1234')
             self.players[0].verify_password('password')
 
     def test_password_is_correct(self):
         self.assertTrue(self.players[0].verify_password('12345'))
+
+    def test_no_password_passed(self):
+        with self.assertRaises(TypeError):
+            self.players[0].verify_password()
 
 
 if __name__ == '__main__':
