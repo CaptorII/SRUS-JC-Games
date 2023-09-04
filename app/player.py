@@ -1,10 +1,13 @@
-class Player:
+from argon2 import PasswordHasher
+ph = PasswordHasher()
 
+
+class Player:
     def __init__(self, uid: str, name: str):
-        self._uid = uid
-        self._name = name
-        self._score = 0
-        self._password = ''
+        self._uid: str = uid
+        self._name: str = name
+        self._hashed_password: str | None = None
+        self._score: int = 0
 
     @property
     def uid(self) -> str:
@@ -15,10 +18,10 @@ class Player:
         return self._name
 
     def add_password(self, new_password: str):
-        self._password = new_password
+        self._hashed_password = ph.hash(new_password)
 
-    def verify_password(self, password_guess: str) -> str:
-        return self._password
+    def verify_password(self, password_guess: str) -> bool:
+        return ph.verify(self._hashed_password, password_guess)
 
     @property
     def score(self) -> int:
