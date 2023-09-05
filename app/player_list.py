@@ -98,7 +98,7 @@ class PlayerList:
                 return
             current_node = self._head
             while current_node is not None:
-                print(current_node.__str__())
+                print(current_node.player.__str__())
                 if current_node.next_node is not None:
                     current_node = current_node.next_node
                 else:
@@ -110,7 +110,7 @@ class PlayerList:
             return
         current_node = self._tail
         while current_node is not None:
-            print(current_node.__str__())
+            print(current_node.player.__str__())
             if current_node.previous_node is not None:
                 current_node = current_node.previous_node
             else:
