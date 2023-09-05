@@ -4,6 +4,7 @@ from app.player import Player
 
 
 class PlayerNode:
+    """PlayerNodes are part of a linked list implementation"""
     def __init__(self, player: Player):
         self._player = player
         self._prev_node: Optional[PlayerNode] = None

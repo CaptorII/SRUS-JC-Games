@@ -7,6 +7,7 @@ class EmptyListError(Exception):
 
 
 class PlayerList:
+    """PlayerLists are used to create a linked list of Player objects"""
     def __init__(self):
         self._head: PlayerNode | None = None
         self._tail: PlayerNode | None = None
