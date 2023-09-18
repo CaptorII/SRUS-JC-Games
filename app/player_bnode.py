@@ -31,3 +31,11 @@ class PlayerBNode:
     @property
     def is_leaf(self) -> bool:
         return self._left is None and self._right is None
+
+    def __str__(self):
+        class_name = self.__class__.__name__
+        return f"{class_name}(player= {self._value}, left= {self._left}, right= {self._right})"
+
+    def __repr__(self):
+        class_name = self.__class__.__name__
+        return f"{class_name}(player={self._value!r}, left={self._left!r}, right={self._right!r})"
