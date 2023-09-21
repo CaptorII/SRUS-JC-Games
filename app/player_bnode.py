@@ -34,8 +34,23 @@ class PlayerBNode:
 
     def __str__(self):
         class_name = self.__class__.__name__
-        return f"{class_name}(player= {self._value}, left= {self._left}, right= {self._right})"
+        return f"{class_name}(player= {self._value})"
 
     def __repr__(self):
         class_name = self.__class__.__name__
         return f"{class_name}(player={self._value!r}, left={self._left!r}, right={self._right!r})"
+
+    def __eq__(self, other):
+        return self._value.name == other.value.name
+
+    def __ge__(self, other):
+        return self._value.name >= other.value.name
+
+    def __le__(self, other):
+        return self._value.name <= other.value.name
+
+    def __lt__(self, other):
+        return self._value.name < other.value.name
+
+    def __gt__(self, other):
+        return self._value.name > other.value.name

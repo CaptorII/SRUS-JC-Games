@@ -61,7 +61,7 @@ class Player:
 
     def __str__(self):
         class_name = self.__class__.__name__
-        return f'{class_name}(uid= {self._uid}, name= {self._name}, score= {self._score})'
+        return f'{class_name}(name= {self._name}, score= {self._score})'
 
     def __repr__(self):
         class_name = self.__class__.__name__
