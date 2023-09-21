@@ -3,11 +3,11 @@ from app.player_bnode import PlayerBNode
 
 
 class PlayerBST:
-    def __init__(self, root_value: Player = None):
-        self._root: Player | None = root_value
+    def __init__(self, root_player: Player = None):
+        self._root: PlayerBNode | None = PlayerBNode(root_player)
 
     @property
-    def root(self) -> Player:
+    def root(self) -> PlayerBNode:
         return self._root
 
     def insert(self, new_player: Player, current_node: PlayerBNode = None):
