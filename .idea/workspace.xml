@@ -49,6 +49,7 @@
       <option name="presentableId" value="Default" />
       <updated>1692241614006</updated>
       <workItem from="1692241619883" duration="11589000" />
+      <workItem from="1697419556419" duration="11471000" />
     </task>
     <servers />
   </component>
@@ -64,7 +65,7 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/SRUS_JC_Games$player_list.coverage" NAME="player_list Coverage Results" MODIFIED="1692588892798" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/app" />
-    <SUITE FILE_PATH="coverage/SRUS_JC_Games$.coverage" NAME=" Coverage Results" MODIFIED="1692590312326" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test" />
+    <SUITE FILE_PATH="coverage/SRUS_JC_Games$.coverage" NAME=" Coverage Results" MODIFIED="1697429862688" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test" />
     <SUITE FILE_PATH="coverage/SRUS_JC_Games$hashintro.coverage" NAME="hashintro Coverage Results" MODIFIED="1692583508050" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/app" />
   </component>
 </project>

@@ -14,9 +14,6 @@ class PlayerBSTTest(unittest.TestCase):
         self.tree.insert(self.players[1])
         self.tree.insert(self.players[2])
         self.tree.insert(self.players[3])
-        self.tree.insert(self.players[4])
-        # for player in self.players:
-        #    self.tree.insert(player)
 
     def test_inserting_players(self):
         self.assertFalse(self.tree.root.is_leaf)
@@ -30,7 +27,14 @@ class PlayerBSTTest(unittest.TestCase):
         self.assertEqual(self.tree.search(self.names_list[3]), self.tree.root.left.right)
 
     def test_auto_balancing_tree(self):
-        ...
+        self.tree.insert(self.players[4])
+        self.tree.insert(self.players[5])
+        self.tree.insert(self.players[6])
+        self.tree.balance_tree()
+        self.assertEqual(self.tree.search(self.names_list[1]), self.tree.root)
+        self.assertEqual(self.tree.search(self.names_list[5]), self.tree.root.left)
+        self.assertEqual(self.tree.search(self.names_list[0]), self.tree.root.right)
+        self.assertEqual(self.tree.search(self.names_list[6]), self.tree.root.right.right)
 
 
 if __name__ == '__main__':

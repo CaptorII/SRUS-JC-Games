@@ -47,32 +47,18 @@ class PlayerBST:
             node.left = None
             node.right = None
         self.node_list.sort()
-        list_length = len(self.node_list)
-        median_index = int(list_length / 2)
-        median_node = self.node_list[median_index]
-        self._root = median_node
-        low_index = median_index - 1
-        if low_index > 0:  # if there is more than one object left of the median
-            median_node.left = self.loop_through(self.node_list[0:low_index])
-        else:
-            median_node.left = self.node_list[low_index]
-        high_index = median_index + 1
-        if high_index < list_length - 1:  # if there is more than one object right of the median
-            median_node.right = self.loop_through(self.node_list[high_index:list_length])
-        elif high_index == list_length - 1:
-            median_node.right = self.node_list[high_index]
+        median_index = len(self.node_list) // 2
+        self._root = self.node_list[median_index]  # set root as median node
+        self.loop_through(self.node_list)  # fill out left and right subtrees
 
-    def loop_through(self, current_list: list[PlayerBNode]) -> PlayerBNode:
+    def loop_through(self, current_list: list[PlayerBNode]) -> PlayerBNode | None:
         list_length = len(current_list)
-        median_index = int(list_length / 2)
+        if list_length == 0:
+            return None
+        median_index = list_length // 2
         median_node = current_list[median_index]
-        low_index = median_index - 1
-        if low_index > 0:  # if there is more than one object left of the median
-            median_node = self.loop_through(current_list[0:low_index])
-        else:
-            return current_list[0]
-        high_index = median_index + 1
-        if high_index < list_length - 1:  # if there is more than one object right of the median
-            median_node = self.loop_through(current_list[high_index:list_length])
-        else:
-            return current_list[0]
+        # recursively repeat function on left side of list
+        median_node.left = self.loop_through(current_list[:median_index])
+        # recursively repeat function on right side of list
+        median_node.right = self.loop_through(current_list[median_index + 1:])
+        return median_node
